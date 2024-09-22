@@ -1,0 +1,11 @@
+
+Analysis for complete linkage:
+
+Cluster 1:
+ - Size: 18
+ - Bounding Box: Min Lon 29.45765, Max Lon 40.8164, Min Lat -98.505355, Max Lat -94.155684
+ - Centroid: (Lat: 33.44, Lon: -96.75)
+ - Standard Deviation: Lat 3.59, Lon 1.12
+ - Box Size: 49.41
+ - Average Distance: 4.66
+ - Isolated Cluster: No

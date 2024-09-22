@@ -1,0 +1,11 @@
+
+Analysis for centroid linkage:
+
+Cluster 1:
+ - Size: 6
+ - Bounding Box: Min Lon 25.775667, Max Lon 29.67415, Min Lat -82.48212, Max Lat -80.106624
+ - Centroid: (Lat: 27.34, Lon: -81.12)
+ - Standard Deviation: Lat 1.47, Lon 1.01
+ - Box Size: 9.26
+ - Average Distance: 2.41
+ - Isolated Cluster: No

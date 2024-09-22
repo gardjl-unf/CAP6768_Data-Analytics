@@ -1,0 +1,11 @@
+
+Analysis for ward linkage:
+
+Cluster 1:
+ - Size: 28
+ - Bounding Box: Min Lon 34.039236, Max Lon 43.041059, Min Lat -82.987381, Max Lat -71.017892
+ - Centroid: (Lat: 39.04, Lon: -78.03)
+ - Standard Deviation: Lat 2.53, Lon 3.27
+ - Box Size: 107.75
+ - Average Distance: 5.29
+ - Isolated Cluster: No
