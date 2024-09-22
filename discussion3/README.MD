@@ -1,1 +1,1 @@
-(https://github.com/gardjl-unf/CAP6768_Data-Analytics/blob/main/discussion3/Group%20Average%20Linkage%20Clusters.png)
+![Group Average Linkage Cluster](https://github.com/gardjl-unf/CAP6768_Data-Analytics/blob/main/discussion3/Group%20Average%20Linkage%20Clusters.png?raw=True)
