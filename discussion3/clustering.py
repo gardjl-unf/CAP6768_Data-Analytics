@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import AgglomerativeClustering as ac
 from sklearn.cluster import KMeans as km
-from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+from scipy.cluster.hierarchy import dendrogram, linkage
 import matplotlib.ticker as ticker
 import geopandas as gpd
 from shapely.geometry import Polygon
@@ -103,6 +103,23 @@ def analyze_clusters(model, data, method_name):
             "Avg Distance": avg_distance,
             "Isolated": "Yes" if cluster_size == 1 else "No"
         })
+        
+        matching_title = next((title for title in GRAPH_TITLES if method_name.title() in title), "Unknown Method")
+        
+        with open(f"{matching_title} {OUTPUT_FILE}", "a") as f:
+            f.write(f"Cluster {label + 1} ({method_name}):\n")
+            f.write(f"Size: {cluster_size}\n")
+            f.write(f"Min Lon: {min_lon}\n")
+            f.write(f"Max Lon: {max_lon}\n")
+            f.write(f"Min Lat: {min_lat}\n")
+            f.write(f"Max Lat: {max_lat}\n")
+            f.write(f"Centroid Lat: {centroid_lat}\n")
+            f.write(f"Centroid Lon: {centroid_lon}\n")
+            f.write(f"Std Lat: {std_lat}\n")
+            f.write(f"Std Lon: {std_lon}\n")
+            f.write(f"Box Size: {box_size}\n")
+            f.write(f"Avg Distance: {avg_distance}\n")
+            f.write(f"Isolated: {'Yes' if cluster_size == 1 else 'No'}\n\n")
     
     return cluster_info
 

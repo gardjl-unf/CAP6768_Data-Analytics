@@ -1,0 +1,140 @@
+Cluster 1 (complete):
+Size: 18
+Min Lon: 29.45765
+Max Lon: 40.8164
+Min Lat: -98.505355
+Max Lat: -94.155684
+Centroid Lat: 33.44152561111111
+Centroid Lon: -96.74768183333332
+Std Lat: 3.5897947057898607
+Std Lon: 1.1245558279726489
+Box Size: 49.40682547125001
+Avg Distance: 4.663196748482075
+Isolated: No
+
+Cluster 2 (complete):
+Size: 16
+Min Lon: 30.065846
+Max Lon: 35.821828
+Min Lat: -92.639625
+Max Lat: -84.281399
+Centroid Lat: 32.3832226875
+Centroid Lon: -89.020019875
+Std Lat: 1.737900916540616
+Std Lon: 2.4137294303661054
+Box Size: 48.109798407931976
+Avg Distance: 3.9618688628938465
+Isolated: No
+
+Cluster 3 (complete):
+Size: 12
+Min Lon: 31.84925
+Max Lon: 41.74004
+Min Lat: -111.930639
+Max Lat: -104.759899
+Centroid Lat: 37.366925083333335
+Centroid Lon: -108.22497625
+Std Lat: 3.845907254893883
+Std Lon: 2.9584263635129306
+Box Size: 70.92428348459994
+Avg Distance: 6.515575231738505
+Isolated: No
+
+Cluster 4 (complete):
+Size: 11
+Min Lon: 38.97165
+Max Lon: 43.041059
+Min Lat: -78.859684
+Max Lat: -71.017892
+Centroid Lat: 41.11249218181819
+Centroid Lon: -74.85964781818181
+Std Lat: 1.3883565253744397
+Std Lon: 2.417233029168751
+Box Size: 31.911458940927993
+Avg Distance: 3.6915632404562633
+Isolated: No
+
+Cluster 5 (complete):
+Size: 6
+Min Lon: 43.606651
+Max Lon: 47.6218
+Min Lat: -123.112172
+Max Lat: -116.2261
+Centroid Lat: 45.71378683333334
+Centroid Lon: -119.75064950000001
+Std Lat: 1.4686211625171215
+Std Lon: 2.9779553309497313
+Box Size: 27.648605104728002
+Avg Distance: 4.67943990833823
+Isolated: No
+
+Cluster 6 (complete):
+Size: 30
+Min Lon: 33.7629
+Max Lon: 41.147067
+Min Lat: -86.784829
+Max Lat: -76.244943
+Centroid Lat: 37.203568866666664
+Centroid Lon: -82.20193919999998
+Std Lat: 2.190772883259615
+Std Lon: 2.8734120520435673
+Box Size: 77.82827838496195
+Avg Distance: 4.732138237561459
+Isolated: No
+
+Cluster 7 (complete):
+Size: 18
+Min Lon: 38.9541
+Max Lon: 44.96185
+Min Lat: -93.625622
+Max Lat: -83.581649
+Centroid Lat: 41.842700111111114
+Centroid Lon: -87.51717994444442
+Std Lat: 1.3403040685097831
+Std Lon: 3.313841566485028
+Box Size: 60.341678790750066
+Avg Distance: 4.480135562798067
+Isolated: No
+
+Cluster 8 (complete):
+Size: 1
+Min Lon: 19.696151
+Max Lon: 19.696151
+Min Lat: -155.087501
+Max Lat: -155.087501
+Centroid Lat: 19.696151
+Centroid Lon: -155.087501
+Std Lat: 0.0
+Std Lon: 0.0
+Box Size: 0.0
+Avg Distance: 0
+Isolated: Yes
+
+Cluster 9 (complete):
+Size: 9
+Min Lon: 32.81495
+Max Lon: 39.438391
+Min Lat: -122.29729
+Max Lat: -115.33381
+Centroid Lat: 36.229081111111114
+Centroid Lon: -119.46063311111112
+Std Lat: 2.0135864862903725
+Std Lon: 2.2583030258751786
+Box Size: 46.12219893468003
+Avg Distance: 4.051770801229277
+Isolated: No
+
+Cluster 10 (complete):
+Size: 6
+Min Lon: 25.775667
+Max Lon: 29.67415
+Min Lat: -82.48212
+Max Lat: -80.106624
+Centroid Lat: 27.34365533333333
+Centroid Lon: -81.12015983333333
+Std Lat: 1.4729742992220054
+Std Lon: 1.006594843418376
+Box Size: 9.260830772568
+Avg Distance: 2.4078877171803743
+Isolated: No
+
