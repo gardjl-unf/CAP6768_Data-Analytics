@@ -44,7 +44,7 @@ class Regression:
         
         # Extract coefficients for the equations
         self.linear_coef, self.linear_intercept = self._get_linear_equation()
-        self.quadratic_coefs = self._get_quadratic_equation()
+        self.quadratic_intercept, self.quadratic_coef_x, self.quadratic_coef_x2 = self._get_quadratic_equation()
         
     def _fit_models(self):
         # Fit linear regression model
@@ -63,20 +63,19 @@ class Regression:
     
     def _get_quadratic_equation(self):
         # Get coefficients for quadratic regression equation
-        # The coefficients correspond to [intercept, x_term, x_squared_term]
         linear_reg = self.quadratic_model.named_steps['linearregression']
         coefs = linear_reg.coef_[0]
         intercept = linear_reg.intercept_[0]
-        # Combine intercept and coefficients
-        # Since PolynomialFeatures adds a bias term, we need to include intercept separately
-        coefs[0] = intercept
-        return coefs  # [c, b, a] for ax^2 + bx + c
+        # The first coefficient in coefs corresponds to the bias term, which is already accounted for by intercept
+        # Therefore, coefs[0] should be close to 0 (or exactly 0 if fit_intercept=True)
+        # Coefficients correspond to [bias (ignored), coef_x, coef_x2]
+        return intercept, coefs[1], coefs[2]  # Return intercept, coef_x, coef_x2
 
     def get_models(self):
         return self.linear_model, self.quadratic_model
 
     def get_equations(self):
-        return (self.linear_coef, self.linear_intercept), self.quadratic_coefs
+        return (self.linear_coef, self.linear_intercept), (self.quadratic_intercept, self.quadratic_coef_x, self.quadratic_coef_x2)
 
 if __name__ == "__main__":
     # Load and process data
@@ -138,11 +137,7 @@ if __name__ == "__main__":
     plt.close()
     
     # Extract regression equations
-    (linear_coef, linear_intercept), quadratic_coefs = regression.get_equations()
-    # For quadratic_coefs, the order is [intercept, coef_x, coef_x2]
-    quadratic_intercept = quadratic_coefs[0]
-    quadratic_coef_x = quadratic_coefs[1]
-    quadratic_coef_x2 = quadratic_coefs[2]
+    (linear_coef, linear_intercept), (quad_intercept, quad_coef_x, quad_coef_x2) = regression.get_equations()
     
     # Additional outputs (e.g., R-squared values)
     r_squared_linear = linear_model.score(X, Y)
@@ -156,7 +151,7 @@ if __name__ == "__main__":
         f.write(f'    Mortgage = {linear_coef:.4f} * Rent + {linear_intercept:.2f}\n')
         f.write(f'Linear Regression R-squared: {r_squared_linear:.4f}\n\n')
         f.write(f'Quadratic Regression Equation:\n')
-        f.write(f'    Mortgage = {quadratic_coef_x2:.6f} * Rent^2 + {quadratic_coef_x:.4f} * Rent + {quadratic_intercept:.2f}\n')
+        f.write(f'    Mortgage = {quad_intercept:.2f} + {quad_coef_x:.4f} * Rent + {quad_coef_x2:.6f} * Rent^2\n')
         f.write(f'Quadratic Regression R-squared: {r_squared_quadratic:.4f}\n')
     
     # Print conclusions to a text file
@@ -171,4 +166,4 @@ if __name__ == "__main__":
         f.write(f'Linear Regression Equation:\n')
         f.write(f'    Mortgage = {linear_coef:.4f} * Rent + {linear_intercept:.2f}\n')
         f.write(f'Quadratic Regression Equation:\n')
-        f.write(f'    Mortgage = {quadratic_coef_x2:.6f} * Rent^2 + {quadratic_coef_x:.4f} * Rent + {quadratic_intercept:.2f}\n')
+        f.write(f'    Mortgage = {quad_intercept:.2f} + {quad_coef_x:.4f} * Rent + {quad_coef_x2:.6f} * Rent^2\n')

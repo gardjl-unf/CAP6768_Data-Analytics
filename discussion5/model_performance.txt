@@ -5,5 +5,5 @@ Linear Regression Equation:
 Linear Regression R-squared: 0.7561
 
 Quadratic Regression Equation:
-    Mortgage = 0.005131 * Rent^2 + -8.2606 * Rent + 3965.63
-Quadratic Regression R-squared: -771.4558
+    Mortgage = 3965.63 + -8.2606 * Rent + 0.005131 * Rent^2
+Quadratic Regression R-squared: 0.8985
