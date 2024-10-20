@@ -1,0 +1,9 @@
+Model Performance Metrics and Equations
+=======================================
+Linear Regression Equation:
+    Mortgage = 1.0699 * Rent + -197.96
+Linear Regression R-squared: 0.7561
+
+Quadratic Regression Equation:
+    Mortgage = 0.005131 * Rent^2 + -8.2606 * Rent + 3965.63
+Quadratic Regression R-squared: -771.4558
