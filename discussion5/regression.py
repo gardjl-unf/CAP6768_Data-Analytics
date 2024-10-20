@@ -109,7 +109,7 @@ if __name__ == "__main__":
     plt.scatter(rent, residuals, color='purple')
     plt.hlines(y=0, xmin=rent.min(), xmax=rent.max(), colors='red', linestyles='--')
     plt.xlabel('Average Asking Rent ($)')
-    plt.ylabel('Residuals')
+    plt.ylabel('Residuals ($)')
     plt.title('Residuals vs. Rent')
     plt.savefig('residuals_plot.png')
     plt.close()
