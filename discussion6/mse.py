@@ -17,37 +17,91 @@ if __name__ == "__main__":
     values = [24, 13, 20, 12, 19, 23, 15]
     forecast1 = []
     forecast2 = []
+    residual1 = []
+    residual2 = []
     mse1 = []
     mse2 = []
+    r_squared1 = []
+    r_squared2 = []
+    
+    accumulator = values[0]
+    cumulative_ssr1 = 0
+    cumulative_ssr2 = 0
+    cumulative_sst = 0
+    
     for i, value in enumerate(values):
         if i == 0:
-            accumulator = value
+            # Initial forecast/residual placeholders for first value
             forecast1.append(None)
             forecast2.append(None)
+            residual1.append(None)
+            residual2.append(None)
             mse1.append(None)
             mse2.append(None)
+            r_squared1.append(None)
+            r_squared2.append(None)
             continue
+
+        # Update accumulators and compute forecasts
         accumulator += value
-        forecast1.append(values[i - 1])
-        forecast2.append(accumulator / (i + 1))
-        mse1.append((((value - forecast1[i]) ** 2)/(i + 1)))
-        mse2.append((((value - forecast2[i]) ** 2)/(i + 1)))
+        forecast1.append(values[i - 1])  # Using previous value as forecast
+        forecast2.append(accumulator / (i + 1))  # Rolling average as forecast
         
-    # Calculate forecasts for month 8
-    forecast1.append(values[-1])  # Most recent value as forecast
-    forecast2.append(accumulator / len(values) + 1)  # Average of all data as forecast
-    mse1.append((((values[-1] - forecast1[-1]) ** 2)/(len(values) + 1)))
-    mse2.append((((values[-1] - forecast2[-1]) ** 2)/(len(values) + 1)))
+        # Calculate residuals
+        res1 = value - forecast1[i]
+        res2 = value - forecast2[i]
+        residual1.append(res1)
+        residual2.append(res2)
+        
+        # Calculate MSE for each method incrementally
+        mse1.append((res1 ** 2) / (i + 1))
+        mse2.append((res2 ** 2) / (i + 1))
+        
+        # Update cumulative SSR (sum of squared residuals)
+        cumulative_ssr1 += res1 ** 2
+        cumulative_ssr2 += res2 ** 2
+        
+        # Update cumulative SST (total sum of squares) based on the current mean
+        mean_so_far = sum(values[:i + 1]) / (i + 1)
+        cumulative_sst = sum((val - mean_so_far) ** 2 for val in values[:i + 1])
+        
+        # Calculate R^2 for each method
+        r_squared1.append(1 - (cumulative_ssr1 / cumulative_sst) if cumulative_sst != 0 else None)
+        r_squared2.append(1 - (cumulative_ssr2 / cumulative_sst) if cumulative_sst != 0 else None)
+        
+    # Calculate forecasts for month 8 (as done previously)
+    forecast1.append(values[-1])
+    forecast2.append(accumulator / len(values) + 1)
+    residual1.append(values[-1] - forecast1[-1])
+    residual2.append(values[-1] - forecast2[-1])
+    mse1.append((residual1[-1] ** 2) / (len(values) + 1))
+    mse2.append((residual2[-1] ** 2) / (len(values) + 1))
     
+    # Final cumulative R^2 values for month 8 forecast
+    cumulative_ssr1 += residual1[-1] ** 2
+    cumulative_ssr2 += residual2[-1] ** 2
+    mean_value = sum(values) / len(values)
+    total_variance = sum((val - mean_value) ** 2 for val in values)
+    r_squared1.append(1 - (cumulative_ssr1 / total_variance) if total_variance != 0 else None)
+    r_squared2.append(1 - (cumulative_ssr2 / total_variance) if total_variance != 0 else None)
     
+    # Debugging output
     if DEBUG:
         print(f"Values: {values}")
-        print(f"Forecast (Most Recent Value):: {forecast1}")
+        print(f"Forecast (Most Recent Value): {forecast1}")
         print(f"Forecast (Rolling Average): {forecast2}")
-        print(f"MSE Most Recent Value):: {mse1}")
+        print(f"Residual (Most Recent Value): {residual1}")
+        print(f"Residual (Rolling Average): {residual2}")
+        print(f"MSE (Most Recent Value): {mse1}")
         print(f"MSE (Rolling Average): {mse2}")
+        print(f"R^2 (Most Recent Value): {r_squared1}")
+        print(f"R^2 (Rolling Average): {r_squared2}")
 
-    print(f"MSE Average (Most Recent Value):: {sum([abs(i) for i in mse1 if i is not None]) / len([i for i in mse1 if i is not None])}")
-    print(f"MSE Average (Rolling Average): {sum([abs(i) for i in mse2 if i is not None]) / len([i for i in mse2 if i is not None])}")
-    print(f"Month 8 Forecast (Most Recent Value):: {forecast1[-1]}")
-    print(f"FMonth 8 Forecast (Rolling Average): {forecast2[-1]}")
+    # Final output
+    print(f"MSE Average (Most Recent Value): {sum(abs(i) for i in mse1 if i is not None) / len([i for i in mse1 if i is not None])}")
+    print(f"MSE Average (Rolling Average): {sum(abs(i) for i in mse2 if i is not None) / len([i for i in mse2 if i is not None])}")
+    if DEBUG:
+        print(f"Final R^2 (Most Recent Value): {r_squared1[-1]}")
+        print(f"Final R^2 (Rolling Average): {r_squared2[-1]}")
+    print(f"Month 8 Forecast (Most Recent Value): {forecast1[-1]}")
+    print(f"Month 8 Forecast (Rolling Average): {forecast2[-1]}")
