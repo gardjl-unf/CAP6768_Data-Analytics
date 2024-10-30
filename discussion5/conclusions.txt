@@ -1,11 +1,4 @@
 Conclusions
 ===========
-Based on the residual plot and R-squared values, the quadratic regression model provides a better fit to the data compared to the linear regression model.
-The quadratic model captures the curvature in the data, which the linear model fails to account for.
-
-Regression Equations:
----------------------
-Linear Regression Equation:
-    Mortgage = 1.0699 * Rent + -197.96
-Quadratic Regression Equation:
-    Mortgage = 3965.63 + -8.2606 * Rent + 0.005131 * Rent^2
+Based on the residual plot and R-squared values, the degree-10 polynomial model provides the best fit to the data compared to the linear and quadratic models.
+The degree-10 polynomial model captures complex patterns in the data, which the linear and quadratic models fail to account for.

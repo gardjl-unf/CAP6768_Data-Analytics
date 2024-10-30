@@ -1,9 +1,32 @@
 Model Performance Metrics and Equations
 =======================================
 Linear Regression Equation:
-    Mortgage = 1.0699 * Rent + -197.96
-Linear Regression R-squared: 0.7561
+    Mortgage = 0.3898 * Rent + 345.33
+Linear Regression R-squared: 0.1557
 
 Quadratic Regression Equation:
-    Mortgage = 3965.63 + -8.2606 * Rent + 0.005131 * Rent^2
-Quadratic Regression R-squared: 0.8985
+    Mortgage = 4811.66 + -10.3207 * Rent + 0.006377 * Rent^2
+Quadratic Regression R-squared: 0.4243
+
+Degree-9 Polynomial Regression Coefficients:
+    Intercept: -11028.7460
+    Coefficients: [ 1.86817286e-20  8.63963706e-23  5.98770107e-20  3.25375952e-17
+  1.32804477e-14  3.25714174e-12 -1.01081448e-14  1.06361892e-17
+ -3.77600309e-21]
+Degree-9 Polynomial Regression R-squared: 0.6015
+
+Degree-10 Polynomial Regression Coefficients:
+    Intercept: -6871.2544
+    Coefficients: [-1.39688611e-22 -9.43522182e-27  1.24749678e-25  7.74135460e-23
+  3.94652184e-20  1.54744032e-17  3.69235983e-15 -1.16943512e-17
+  1.24976364e-20 -4.49140287e-24]
+Degree-10 Polynomial Regression R-squared: 0.6093
+
+Degree-20 Polynomial Regression Coefficients:
+    Intercept: 128.7562
+    Coefficients: [ 6.44745012e-52 -1.80999169e-56  2.48920611e-60  9.72346137e-63
+  2.82434312e-77  2.36054284e-74  1.91148630e-71  1.30790745e-68
+  8.98665268e-66  5.92195910e-63  3.72373186e-60  2.21468339e-57
+  1.22802548e-54  6.19768032e-52  2.72686031e-49  9.56931732e-47
+  2.09368115e-44 -7.11591140e-47  8.06005356e-50 -3.04127510e-53]
+Degree-20 Polynomial Regression R-squared: 0.7023
