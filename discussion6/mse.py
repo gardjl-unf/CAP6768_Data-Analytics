@@ -48,22 +48,20 @@ if __name__ == "__main__":
         forecast2.append(accumulator / (i + 1))  # Rolling average as forecast
         
         # Calculate residuals
-        res1 = value - forecast1[i]
-        res2 = value - forecast2[i]
-        residual1.append(res1)
-        residual2.append(res2)
+        residual1.append(value - forecast1[i])
+        residual2.append(value - forecast2[i])
         
         # Calculate MSE for each method incrementally
-        mse1.append((res1 ** 2) / (i + 1))
-        mse2.append((res2 ** 2) / (i + 1))
+        mse1.append((residual1[i] ** 2) / (i + 1))
+        mse2.append((residual2[i] ** 2) / (i + 1))
         
         # Update cumulative SSR (sum of squared residuals)
-        cumulative_ssr1 += res1 ** 2
-        cumulative_ssr2 += res2 ** 2
+        cumulative_ssr1 += residual1[i] ** 2
+        cumulative_ssr2 += residual2[i] ** 2
         
         # Update cumulative SST (total sum of squares) based on the current mean
-        mean_so_far = sum(values[:i + 1]) / (i + 1)
-        cumulative_sst = sum((val - mean_so_far) ** 2 for val in values[:i + 1])
+        mean = accumulator / (i + 1)
+        cumulative_sst = sum((val - mean) ** 2 for val in values[:i])
         
         # Calculate R^2 for each method
         r_squared1.append(1 - (cumulative_ssr1 / cumulative_sst) if cumulative_sst != 0 else None)
@@ -71,19 +69,7 @@ if __name__ == "__main__":
         
     # Calculate forecasts for month 8 (as done previously)
     forecast1.append(values[-1])
-    forecast2.append(accumulator / len(values) + 1)
-    residual1.append(values[-1] - forecast1[-1])
-    residual2.append(values[-1] - forecast2[-1])
-    mse1.append((residual1[-1] ** 2) / (len(values) + 1))
-    mse2.append((residual2[-1] ** 2) / (len(values) + 1))
-    
-    # Final cumulative R^2 values for month 8 forecast
-    cumulative_ssr1 += residual1[-1] ** 2
-    cumulative_ssr2 += residual2[-1] ** 2
-    mean_value = sum(values) / len(values)
-    total_variance = sum((val - mean_value) ** 2 for val in values)
-    r_squared1.append(1 - (cumulative_ssr1 / total_variance) if total_variance != 0 else None)
-    r_squared2.append(1 - (cumulative_ssr2 / total_variance) if total_variance != 0 else None)
+    forecast2.append(accumulator / len(values))
     
     # Debugging output
     if DEBUG:
