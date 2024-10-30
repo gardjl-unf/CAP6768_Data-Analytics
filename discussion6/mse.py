@@ -11,7 +11,7 @@
     Which method appears to provide the better forecast?
 '''
 
-DEBUG = True
+DEBUG = False
 
 if __name__ == "__main__":
     values = [24, 13, 20, 12, 19, 23, 15]
@@ -42,12 +42,12 @@ if __name__ == "__main__":
     
     if DEBUG:
         print(f"Values: {values}")
-        print(f"Forecast 1: {forecast1}")
-        print(f"Forecast 2: {forecast2}")
-        print(f"MSE 1: {mse1}")
-        print(f"MSE 2: {mse2}")
+        print(f"Forecast (Most Recent Value):: {forecast1}")
+        print(f"Forecast (Rolling Average): {forecast2}")
+        print(f"MSE Most Recent Value):: {mse1}")
+        print(f"MSE (Rolling Average): {mse2}")
 
-    print(f"MSE Average for most recent value: {sum([abs(i) for i in mse1 if i is not None]) / len([i for i in mse1 if i is not None])}")
-    print(f"MSE Average for average of all data: {sum([abs(i) for i in mse2 if i is not None]) / len([i for i in mse2 if i is not None])}")
-    print(f"Forecast for month 8 using the most recent value: {forecast1[-1]}")
-    print(f"Forecast for month 8 using the average of all data: {forecast2[-1]}")
+    print(f"MSE Average (Most Recent Value):: {sum([abs(i) for i in mse1 if i is not None]) / len([i for i in mse1 if i is not None])}")
+    print(f"MSE Average (Rolling Average): {sum([abs(i) for i in mse2 if i is not None]) / len([i for i in mse2 if i is not None])}")
+    print(f"Month 8 Forecast (Most Recent Value):: {forecast1[-1]}")
+    print(f"FMonth 8 Forecast (Rolling Average): {forecast2[-1]}")
