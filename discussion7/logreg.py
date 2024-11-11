@@ -110,7 +110,6 @@ class LogReg:
                 best_solver = solver
                 best_c = c
         return best_model, best_solver, best_c, best_auc
-        return best_model
 
     def evaluate_model(self):
         # Evaluate the selected model on the test set
@@ -122,9 +121,6 @@ class LogReg:
         with open("test_auc_score.txt", "w") as f:
             f.write(f"Test AUC: {auc_score_test}")
         
-        # Save the AUC score to a file
-        with open("test_auc_score.txt", "w") as f:
-            f.write(f"Test AUC: {auc_score_test}")        
         return auc_score_test
 
     def lift_measure(self):
@@ -134,7 +130,7 @@ class LogReg:
                                     .sort_values(by='Predicted_Probability', ascending=False)
         top_10_percent = test_data_sorted.iloc[:int(len(test_data_sorted) * 0.1)]
         lift = top_10_percent['Coupon'].mean() / self.Y_test.mean()
-        print(f"Lift in top 10%: {lift}")
+        print(f"\nLift in top 10%: {lift}")
         
         # Save the lift measure to a file
         with open("lift_measure.txt", "w") as f:
@@ -155,7 +151,7 @@ class LogReg:
         plt.savefig("roc_curve.png")
         
     def sensitivity_vs_specificity(self, sensitivity_target=0.80):
-        # Calculate sensitivity and required specificity
+        # Calculate the confusion matrix for the test set
         test_predictions = self.best_model.predict(self.X_test)
         tn, fp, fn, tp = confusion_matrix(self.Y_test, test_predictions).ravel()
 
@@ -163,20 +159,23 @@ class LogReg:
         sensitivity = tp / (tp + fn)
         print(f"Sensitivity: {sensitivity}")
 
-        # Specificity
-        specificity = tn / (tn + fp)
-        print(f"Specificity: {specificity}")
+        # Rearranging to find the Class 0 error rate required for a target sensitivity
+        if sensitivity < sensitivity_target:
+            tp_required = sensitivity_target * (tp + fn)
+            fn_required = (tp + fn) - tp_required
+            fp_required = (fn_required * fp) / fn if fn > 0 else 0  # maintaining FP:FN ratio
+            class_0_error = fp_required / (tn + fp_required) if (tn + fp_required) > 0 else 0
+        else:
+            class_0_error = fp / (tn + fp)
 
-        # Determine Class 0 error rate tolerated to achieve the desired sensitivity
-        class_0_error = fp / (tn + fp)
-        print(f"Class 0 Error Rate: {class_0_error}")
+        print(f"Class 0 Error Rate to achieve at least {sensitivity_target} sensitivity: {class_0_error}")
 
         # Save sensitivity and class 0 error rate to a file
         with open("sensitivity_specificity.txt", "w") as f:
-            f.write(f"Sensitivity: {sensitivity}")
-            f.write(f"\nSpecificity: {specificity}")
-            f.write(f"\nClass 0 Error Rate: {class_0_error}")
-            f.write(f"To achieve a sensitivity of at least 0.80, the model may need to tolerate a higher Class 0 error rate, as calculated above.")        
+            f.write(f"Sensitivity: {sensitivity}\n")
+            f.write(f"Specificity: {tn / (tn + fp)}\n")
+            f.write(f"Class 0 Error Rate to achieve at least {sensitivity_target} sensitivity: {class_0_error}\n")
+        
         return sensitivity, class_0_error
 
     def output_confusion_matrix(self):
