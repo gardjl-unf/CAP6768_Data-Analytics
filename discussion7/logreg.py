@@ -127,14 +127,28 @@ class LogReg:
         # Calculate lift for top 10% of test set observations
         test_predictions = self.best_model.predict_proba(self.X_test)[:, 1]
         test_data_sorted = pd.DataFrame({'Predicted_Probability': test_predictions, 'Coupon': self.Y_test})\
-                                    .sort_values(by='Predicted_Probability', ascending=False)
+                                        .sort_values(by='Predicted_Probability', ascending=False)
         top_10_percent = test_data_sorted.iloc[:int(len(test_data_sorted) * 0.1)]
         lift = top_10_percent['Coupon'].mean() / self.Y_test.mean()
-        print(f"\nLift in top 10%: {lift}")
+        print(f"Lift in top 10%: {lift}")
         
-        # Save the lift measure to a file
+        # Additional evaluation of coupon users distribution
+        num_total_customers = len(self.Y_test)
+        num_coupon_users = sum(self.Y_test)
+        top_10_percent_coupon_users = sum(top_10_percent['Coupon'])
+        total_coupon_percentage = (num_coupon_users / num_total_customers) * 100
+        top_10_coupon_percentage = (top_10_percent_coupon_users / len(top_10_percent)) * 100
+
+        # Print and save the additional lift details
+        print(f"Total coupon users: {num_coupon_users} out of {num_total_customers} ({total_coupon_percentage:.2f}%)")
+        print(f"Coupon users in top 10%: {top_10_percent_coupon_users} out of {len(top_10_percent)} ({top_10_coupon_percentage:.2f}%)")
+        
+        # Save the lift measure and additional information to a file
         with open("lift_measure.txt", "w") as f:
-            f.write(f"Lift in top 10%: {lift}")        
+            f.write(f"Lift in top 10%: {lift}\n")
+            f.write(f"Total coupon users: {num_coupon_users} out of {num_total_customers} ({total_coupon_percentage:.2f}%)\n")
+            f.write(f"Coupon users in top 10%: {top_10_percent_coupon_users} out of {len(top_10_percent)} ({top_10_coupon_percentage:.2f}%)\n")
+        
         return lift
 
     def plot_roc_curve(self):
