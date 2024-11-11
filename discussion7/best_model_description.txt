@@ -1,0 +1,3 @@
+Best Model Description: Solver=lbfgs, C=100, AUC=0.9506269592476488
+The final model uses the solver 'lbfgs' with regularization parameter C=100.
+It achieved an AUC of 0.9506269592476488 on the validation set, which was the best performance among all tested models.

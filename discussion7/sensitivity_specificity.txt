@@ -1,0 +1,3 @@
+Sensitivity: 0.6756756756756757
+Specificity: 0.9938650306748467
+Class 0 Error Rate: 0.006134969325153374To achieve a sensitivity of at least 0.80, the model may need to tolerate a higher Class 0 error rate, as calculated above.

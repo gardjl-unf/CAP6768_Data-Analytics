@@ -1,0 +1,2 @@
+Test AUC: 0.9200795887912452
+This AUC indicates the overall performance of the selected model on the test dataset, assessing its classification capability.

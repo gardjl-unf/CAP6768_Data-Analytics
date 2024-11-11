@@ -1,0 +1,1 @@
+Final Model Equation: Coupon = 1 / (1 + exp(-(-8.040539892275508 + 0.0011311165389732989 * Spending + 2.9407071253777706 * Card)))
